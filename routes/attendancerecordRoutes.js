@@ -1,6 +1,6 @@
 const express = require("express");
 const AttendanceRecord = require("../models/AttendanceRecord");
-const { adminAuth, teacherAuth } = require("../middleware/auth");
+const { adminAuth, teacherAuth } = require("../middleware/Auth");
 
 const router = express.Router();
 

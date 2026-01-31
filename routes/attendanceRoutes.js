@@ -3,7 +3,7 @@ const AttendanceRecord = require("../models/AttendanceRecord");
 const Student = require("../models/Student");
 const Subject = require("../models/Subject");
 const TeacherAssignment = require("../models/TeacherAssignment");
-const { teacherAuth, adminAuth } = require("../middleware/auth");
+const { teacherAuth, adminAuth } = require("../middleware/Auth");
 const { sendAbsentMail } = require("../utils/mailer");
 
 const router = express.Router();
