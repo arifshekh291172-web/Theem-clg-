@@ -26,7 +26,7 @@ connectDB();
 
 /* AUTH */
 const adminauthRoutes = require("./routes/adminauthRoutes");
-const teacherAuthRoutes = require("./routes/teacherAuthRoutes");
+const teacherauthRoutes = require("./routes/teacherauthRoutes");
 
 /* ADMIN CORE */
 const adminRoutes = require("./routes/adminRoutes");
@@ -54,7 +54,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 
 /* AUTH */
 app.use("/api/admin", adminauthRoutes);
-app.use("/api/teacher", teacherAuthRoutes);
+app.use("/api/teacher", teacherauthRoutes);
 
 /* ADMIN CORE (teachers CRUD) */
 app.use("/api/admin", adminRoutes);
