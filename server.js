@@ -66,8 +66,8 @@ app.use("/api/admin", adminAssignRoutes);
 app.use("/api/admin", subjectRoutes);
 
 /* STUDENTS */
-app.use("/api/students", StudentRoutes); // admin only
-app.use("/api/teacher", teacherStudentRoutes); // ✅ teacher access
+app.use("/api/students", studentRoutes); // admin only
+app.use("/api/teacher", teacherrecordRoutes); // ✅ teacher access
 
 /* ATTENDANCE */
 app.use("/api/attendance", attendanceRoutes);
