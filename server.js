@@ -34,14 +34,12 @@ const adminRoutes = require("./routes/adminRoutes");
 /* ADMIN ASSIGN */
 const adminAssignRoutes = require("./routes/adminAssignRoutes");
 
-/* SUBJECTS (ADMIN) */
+/* SUBJECTS */
 const subjectRoutes = require("./routes/subjectRoutes");
 
-/* STUDENTS (ADMIN ONLY) */
+/* STUDENTS */
 const studentRoutes = require("./routes/studentRoutes");
-
-/* ✅ STUDENTS (TEACHER SAFE ROUTE) */
-const teacherstudentRoutes = require("./routes/teacherStudentRoutes");
+const teacherStudentRoutes = require("./routes/teacherStudentRoutes");
 
 /* ATTENDANCE */
 const attendanceRoutes = require("./routes/attendanceRoutes");
@@ -54,20 +52,16 @@ const notificationRoutes = require("./routes/notificationRoutes");
 
 /* AUTH */
 app.use("/api/admin", adminauthRoutes);
-app.use("/api/teacher", teacherauthRoutes);
+app.use("/api/teacher/auth", teacherauthRoutes);
 
-/* ADMIN CORE (teachers CRUD) */
+/* ADMIN CORE */
 app.use("/api/admin", adminRoutes);
-
-/* ADMIN ASSIGN */
 app.use("/api/admin", adminAssignRoutes);
-
-/* SUBJECTS */
 app.use("/api/admin", subjectRoutes);
 
 /* STUDENTS */
-app.use("/api/students", studentRoutes); // admin only
-app.use("/api/teacher", teacherrecordRoutes); // ✅ teacher access
+app.use("/api/students", studentRoutes);              // admin only
+app.use("/api/teacher/students", teacherStudentRoutes); // ✅ teacher safe route
 
 /* ATTENDANCE */
 app.use("/api/attendance", attendanceRoutes);
@@ -97,19 +91,56 @@ app.post("/api/send-email", async (req, res) => {
     await transporter.sendMail({
       from: `"Theem College Of Engineering" <${process.env.EMAIL_USER}>`,
       to,
-      subject: "Student Absence Alert",
+      subject: "Important Attendance Notification",
       html: `
-        <h3>Attendance Notification</h3>
-        <p>Your child <b>${student}</b> was 
-           <b style="color:red">ABSENT</b>.</p>
-        <p><b>Subject:</b> ${subject}</p>
-        <p><b>Date:</b> ${date}</p>
-        <br>
-        <p>— Theem College Of Engineering</p>
+        <div style="font-family: Arial, sans-serif; line-height:1.6">
+          <h2 style="color:#2c3e50">Attendance Notification</h2>
+
+          <p>Dear Parent / Guardian,</p>
+
+          <p>
+            This is to inform you that your ward 
+            <b style="color:#000">${student}</b> was marked
+            <b style="color:red">ABSENT</b> for the following lecture:
+          </p>
+
+          <table style="border-collapse:collapse">
+            <tr>
+              <td><b>Subject</b></td>
+              <td>: ${subject}</td>
+            </tr>
+            <tr>
+              <td><b>Date</b></td>
+              <td>: ${date}</td>
+            </tr>
+          </table>
+
+          <p>
+            Regular attendance is essential for academic success, discipline,
+            and overall professional growth. We kindly request you to encourage
+            your child to attend all scheduled lectures and practical sessions
+            without fail.
+          </p>
+
+          <p>
+            If there is any genuine concern or difficulty, please feel free to
+            contact the respective faculty or the college administration.
+          </p>
+
+          <p style="margin-top:20px">
+            Thank you for your continued support and cooperation.
+          </p>
+
+          <p>
+            Warm regards,<br/>
+            <b>Theem College Of Engineering</b><br/>
+            Attendance Monitoring Cell
+          </p>
+        </div>
       `
     });
 
-    res.json({ success: true });
+    res.json({ success: true, message: "Email sent successfully" });
   } catch (err) {
     console.error("Email Error:", err.message);
     res.status(500).json({ success: false });
@@ -118,19 +149,17 @@ app.post("/api/send-email", async (req, res) => {
 
 /* ================= HEALTH CHECK ================= */
 app.get("/", (req, res) => {
-  res.send("✅ Attendance Management Backend Running");
+  res.send("✅ Attendance Management Backend Running Successfully");
 });
 
 /* ================= GLOBAL ERROR HANDLER ================= */
 app.use((err, req, res, next) => {
   console.error("Server Error:", err.stack);
-  res.status(500).json({
-    message: "Internal Server Error"
-  });
+  res.status(500).json({ message: "Internal Server Error" });
 });
 
 /* ================= START SERVER ================= */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
