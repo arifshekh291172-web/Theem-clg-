@@ -38,10 +38,10 @@ const adminAssignRoutes = require("./routes/adminAssignRoutes");
 const subjectRoutes = require("./routes/subjectRoutes");
 
 /* STUDENTS (ADMIN ONLY) */
-const studentRoutes = require("./routes/studentRoutes");
+const StudentRoutes = require("./routes/StudentRoutes");
 
 /* ✅ STUDENTS (TEACHER SAFE ROUTE) */
-const teacherstudentRoutes = require("./routes/teacherstudentRoutes");
+const teacherStudentRoutes = require("./routes/teacherStudentRoutes");
 
 /* ATTENDANCE */
 const attendanceRoutes = require("./routes/attendanceRoutes");
@@ -66,8 +66,8 @@ app.use("/api/admin", adminAssignRoutes);
 app.use("/api/admin", subjectRoutes);
 
 /* STUDENTS */
-app.use("/api/students", studentRoutes); // admin only
-app.use("/api/teacher", teacherstudentRoutes); // ✅ teacher access
+app.use("/api/students", StudentRoutes); // admin only
+app.use("/api/teacher", teacherStudentRoutes); // ✅ teacher access
 
 /* ATTENDANCE */
 app.use("/api/attendance", attendanceRoutes);
