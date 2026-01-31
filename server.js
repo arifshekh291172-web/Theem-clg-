@@ -25,7 +25,7 @@ connectDB();
 /* ================= ROUTES IMPORT ================= */
 
 /* AUTH */
-const adminAuthRoutes = require("./routes/adminAuthRoutes");
+const adminauthRoutes = require("./routes/adminauthRoutes");
 const teacherAuthRoutes = require("./routes/teacherAuthRoutes");
 
 /* ADMIN CORE */
@@ -53,7 +53,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 /* ================= USE ROUTES ================= */
 
 /* AUTH */
-app.use("/api/admin", adminAuthRoutes);
+app.use("/api/admin", adminauthRoutes);
 app.use("/api/teacher", teacherAuthRoutes);
 
 /* ADMIN CORE (teachers CRUD) */
