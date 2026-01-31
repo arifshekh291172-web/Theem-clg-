@@ -45,7 +45,7 @@ const teacherstudentRoutes = require("./routes/teacherStudentRoutes");
 
 /* ATTENDANCE */
 const attendanceRoutes = require("./routes/attendanceRoutes");
-const attendanceRecordRoutes = require("./routes/attendanceRecordRoutes");
+const attendancerecordRoutes = require("./routes/attendancerecordRoutes");
 
 /* NOTIFICATIONS */
 const notificationRoutes = require("./routes/notificationRoutes");
@@ -71,7 +71,7 @@ app.use("/api/teacher", teacherStudentRoutes); // ✅ teacher access
 
 /* ATTENDANCE */
 app.use("/api/attendance", attendanceRoutes);
-app.use("/api/attendance-record", attendanceRecordRoutes);
+app.use("/api/attendance-record", attendancerecordRoutes);
 
 /* NOTIFICATIONS */
 app.use("/api/notifications", notificationRoutes);
