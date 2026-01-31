@@ -38,10 +38,10 @@ const adminAssignRoutes = require("./routes/adminAssignRoutes");
 const subjectRoutes = require("./routes/subjectRoutes");
 
 /* STUDENTS (ADMIN ONLY) */
-const StudentRoutes = require("./routes/StudentRoutes");
+const studentRoutes = require("./routes/studentRoutes");
 
 /* ✅ STUDENTS (TEACHER SAFE ROUTE) */
-const teacherStudentRoutes = require("./routes/teacherStudentRoutes");
+const teacherstudentRoutes = require("./routes/teacherStudentRoutes");
 
 /* ATTENDANCE */
 const attendanceRoutes = require("./routes/attendanceRoutes");
