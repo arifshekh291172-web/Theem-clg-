@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Register | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="attendance-record.css">
+
+    <!-- EXCEL -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+        <h2>Theem College Of Engineering – Attendance Register (Admin)</h2>
+    </div>
+
+    <div class="container">
+
+        <!-- ================= SUMMARY ================= -->
+        <div class="summary">
+            <div class="sum-card">
+                <h2 id="totalStudents">0</h2>
+                <p>Total Students</p>
+            </div>
+
+            <div class="sum-card">
+                <h2 id="avgPercent">0%</h2>
+                <p>Average Attendance</p>
+            </div>
+
+            <div class="sum-card">
+                <h2 id="defaulterCount">0</h2>
+                <p>Defaulters</p>
+            </div>
+        </div>
+
+        <!-- ================= FILTERS ================= -->
+        <div class="filters">
+
+            <input type="text" id="search" placeholder="Search Name / Roll">
+
+            <select id="department">
+                <option value="">Select Department</option>
+                <option value="AN">AN</option>
+                <option value="AI">AI</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+                <option value="EE">EE</option>
+            </select>
+
+            <select id="year">
+                <option value="">Select Year</option>
+                <option value="FY">FY</option>
+                <option value="SY">SY</option>
+                <option value="TY">TY</option>
+            </select>
+
+            <select id="subject">
+                <option value="">Select Subject</option>
+            </select>
+
+            <select id="month">
+                <option value="">Select Month</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+
+            <label class="check">
+                <input type="checkbox" id="defOnly">
+                Defaulters Only
+            </label>
+
+            <button onclick="generateMonthlySummary()">
+                Monthly Summary
+            </button>
+
+            <button onclick="exportSubjectExcel()">
+                Subject Excel
+            </button>
+
+            <button onclick="exportExcel()">
+                Full Excel
+            </button>
+        </div>
+
+        <!-- ================= TABLE ================= -->
+        <div class="table-wrap">
+            <table id="table">
+                <thead>
+                    <tr id="head"></tr>
+                </thead>
+                <tbody id="body"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ================= JS ================= -->
+    <script src="attendance-record.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Teacher | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-create-teacher.css">
+</head>
+
+<body>
+
+    <!-- AUTH -->
+    <script>
+        if (!localStorage.getItem("adminToken")) {
+            location.href = "admin-login.html";
+        }
+    </script>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="nav-left">Theem College Of Engineering – Admin</div>
+        <div class="nav-links">
+            <a onclick="goDashboard()">Dashboard</a>
+            <a onclick="goTeachers()">Teachers</a>
+            <a onclick="logout()" class="logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div class="card">
+            <h2>Create Teacher Account</h2>
+
+            <label>Teacher Name</label>
+            <input type="text" id="name" placeholder="Enter full name">
+
+            <label>Email</label>
+            <input type="email" id="email" placeholder="teacher@email.com">
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Minimum 6 characters">
+
+            <button class="btn" onclick="createTeacher()">Create Teacher</button>
+
+            <p id="msg"></p>
+        </div>
+
+    </div>
+
+    <script src="admin-create-teacher.js"></script>
+</body>
+
+</html>

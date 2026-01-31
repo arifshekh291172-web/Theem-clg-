@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Assign Teacher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="admin-assign.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navbar">
+        Assign Teacher – Attendance System
+    </div>
+
+    <div class="container">
+        <h2>Teacher Assignment</h2>
+
+        <div class="form">
+
+            <label>Teacher (Email)</label>
+            <select id="teacherSelect">
+                <option value="">Loading teachers...</option>
+            </select>
+
+            <label>Department</label>
+            <select id="department">
+                <option value="">Select Department</option>
+                <option value="AN">AN</option>
+                <option value="AI">AI</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+            </select>
+
+            <label>Subject</label>
+            <select id="subjectSelect">
+                <option value="">Select Subject</option>
+            </select>
+
+            <label>Year</label>
+            <div class="years">
+                <label><input type="checkbox" value="FY"> FY</label>
+                <label><input type="checkbox" value="SY"> SY</label>
+                <label><input type="checkbox" value="TY"> TY</label>
+            </div>
+
+            <button id="assignBtn">Assign</button>
+
+            <p id="msg"></p>
+        </div>
+    </div>
+
+    <script src="admin-assign.js"></script>
+</body>
+
+</html>

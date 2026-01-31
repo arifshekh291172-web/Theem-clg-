@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Attendance System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <div class="navbar">
+        <div class="nav-left">
+            Theem College Of Engineering – Admin Panel
+        </div>
+
+        <div class="nav-links">
+            <a onclick="goDashboard()">Dashboard</a>
+            <a onclick="goStudents()">Students</a>
+            <a onclick="goAssign()">Assign Teacher</a>
+            <a onclick="goAttendance()">Attendance</a>
+            <a onclick="location.href='admin-subject.html'">Subjects</a>
+            <a onclick="location.href='admin-create-teacher.html'">Create Teacher</a>
+            <a onclick="location.href='admin-teacher-list.html'">Teachers</a>
+            <a class="logout" onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <!-- ================= CONTENT ================= -->
+    <div class="content">
+
+        <!-- FILTERS -->
+        <div class="filters">
+            <select id="year">
+                <option value="">All Years</option>
+                <option value="FY">FY</option>
+                <option value="SY">SY</option>
+                <option value="TY">TY</option>
+            </select>
+
+            <select id="department">
+                <option value="">All Departments</option>
+                <option value="AN">AN</option>
+                <option value="AI">AI</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+                <option value="EE">EE</option>
+            </select>
+
+            <select id="subject">
+                <option value="">All Subjects</option>
+            </select>
+        </div>
+
+        <!-- SUMMARY CARDS -->
+        <div class="cards">
+            <div class="card">
+                <h2 id="totalStudents">0</h2>
+                <p>Total Students</p>
+            </div>
+
+            <div class="card">
+                <h2 id="defaulters">0</h2>
+                <p>Defaulter Students</p>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+            <button class="btn" onclick="goStudents()">Manage Students</button>
+            <button class="btn btn-secondary" onclick="goAttendance()">View Attendance</button>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="admin-dashboard.js"></script>
+</body>
+
+</html>

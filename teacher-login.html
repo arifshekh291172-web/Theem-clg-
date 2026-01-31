@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Login | Attendance System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, sans-serif;
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 36px;
+            border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #1e40af;
+            margin-bottom: 6px;
+        }
+
+        .login-card p {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 28px;
+            font-size: 14px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .error {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #dc2626;
+        }
+
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h2>Teacher Login</h2>
+        <p>Attendance Management System</p>
+
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="teacher@college.edu">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="••••••••">
+
+        <button id="loginBtn" onclick="login()">Login</button>
+
+        <div id="error" class="error"></div>
+
+        <div class="footer">
+            Theem College of Engineering © 2025
+        </div>
+    </div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorEl = document.getElementById("error");
+            const btn = document.getElementById("loginBtn");
+
+            errorEl.innerText = "";
+
+            if (!email || !password) {
+                errorEl.innerText = "Email and password are required";
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Logging in...";
+
+            try {
+                const res = await fetch("http://localhost:5000/api/teacher/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || "Login failed");
+                }
+
+                /* ================= SAVE SESSION (FIXED) ================= */
+                localStorage.setItem("teacherToken", data.token);
+
+                // 🔥 ADMIN ASSIGNED DATA (FROM data.teacher)
+                // 🔥 BACKEND NOW SENDS ARRAYS
+                localStorage.setItem(
+                    "teacherDepartment",
+                    data.teacher.departments.join(", ")
+                );
+
+                localStorage.setItem(
+                    "teacherSubject",
+                    data.teacher.subjects.join(", ")
+                );
+
+                localStorage.setItem(
+                    "teacherYears",
+                    JSON.stringify(data.teacher.years)
+                );
+
+                /* ================= REDIRECT ================= */
+                window.location.href = "teacher-dashboard.html";
+
+            } catch (err) {
+                errorEl.innerText = err.message || "Server not reachable";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Login";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

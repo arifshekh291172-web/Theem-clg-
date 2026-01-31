@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Success</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f1f5f9;
+      font-family: Inter, sans-serif;
+    }
+
+    .card {
+      max-width: 420px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    }
+
+    h2 {
+      color: #16a34a;
+      text-align: center;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .info div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .summary {
+      margin-top: 18px;
+      padding: 14px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+
+    .present {
+      color: #16a34a;
+      font-weight: 700;
+    }
+
+    .absent {
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>✔ Attendance Submitted</h2>
+    <p style="text-align:center">Attendance has been recorded successfully.</p>
+
+    <div class="info">
+      <div><span>Department</span><strong id="dept">-</strong></div>
+      <div><span>Subject</span><strong id="subject">-</strong></div>
+      <div><span>Year</span><strong id="year">-</strong></div>
+      <div><span>Date</span><strong id="date">-</strong></div>
+    </div>
+
+    <div class="summary">
+      <div><span>Total Students</span><strong id="total">0</strong></div>
+      <div><span class="present">Present</span><strong id="present">0</strong></div>
+      <div><span class="absent">Absent</span><strong id="absent">0</strong></div>
+    </div>
+
+    <button onclick="goDashboard()">Go to Dashboard</button>
+  </div>
+
+  <script>
+    /* =========================
+       LOAD LAST ATTENDANCE INFO
+    ========================= */
+
+    const dept = localStorage.getItem("lockDept");
+    const subject = localStorage.getItem("lockSubject");
+    const years = JSON.parse(localStorage.getItem("lockYears") || "[]");
+
+    /* Use first year (attendance page ek year pe hota hai) */
+    const year = years[0] || "-";
+
+    /* Today date (same logic as attendance page) */
+    function todayDate() {
+      const d = new Date();
+      return String(d.getDate()).padStart(2, "0") + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        d.getFullYear();
+    }
+
+    document.getElementById("dept").innerText = dept || "-";
+    document.getElementById("subject").innerText = subject || "-";
+    document.getElementById("year").innerText = year;
+    document.getElementById("date").innerText = todayDate();
+
+    /* =========================
+       CALCULATE PRESENT / ABSENT
+    ========================= */
+
+    let total = 0, present = 0, absent = 0;
+
+    Object.keys(localStorage).forEach(key => {
+      if (!key.startsWith("attendance_")) return;
+
+      const students = JSON.parse(localStorage.getItem(key)) || [];
+
+      students.forEach(stu => {
+        if (
+          stu.department === dept &&
+          stu.subject === subject &&
+          stu.year === year
+        ) {
+          total++;
+          const att = stu.attendance || {};
+          if (att[todayDate()] === "P") present++;
+          else absent++;
+        }
+      });
+    });
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("present").innerText = present;
+    document.getElementById("absent").innerText = absent;
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+    function goDashboard() {
+      window.location.href = "teacher-dashboard.html";
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,270 @@
+/* =====================================================
+   GLOBAL RESET & BASE
+===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+.navbar {
+    height: 64px;
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 26px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.nav-left {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    transition: all .25s ease;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+.nav-links .logout {
+    background: #dc2626;
+}
+
+.nav-links .logout:hover {
+    background: #b91c1c;
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+.content {
+    padding: 30px;
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* =====================================================
+   FILTER BAR
+===================================================== */
+.filters {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 16px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.filters select {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    background: #f8fafc;
+    min-width: 180px;
+    outline: none;
+    transition: all .2s ease;
+}
+
+.filters select:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+}
+
+/* =====================================================
+   SUMMARY CARDS
+===================================================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-bottom: 34px;
+}
+
+.card {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    padding: 26px;
+    border-radius: 20px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(37, 99, 235, 0.08));
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card h2 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #1d4ed8;
+}
+
+.card p {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+.actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    padding: 14px 24px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+    transition: all .25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.45);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #64748b, #475569);
+    box-shadow: 0 10px 20px rgba(100, 116, 139, 0.35);
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 16px 30px rgba(100, 116, 139, 0.45);
+}
+
+/* =====================================================
+   TABLE (COMMON – OTHER ADMIN PAGES)
+===================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background: #e0e7ff;
+    font-weight: 800;
+    color: #1e3a8a;
+}
+
+tr:hover td {
+    background: #f8fafc;
+}
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+.text-danger {
+    color: #dc2626;
+}
+
+.text-success {
+    color: #16a34a;
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+@media (max-width: 900px) {
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters select {
+        width: 100%;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 12px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+    }
+
+    .card h2 {
+        font-size: 28px;
+    }
+}

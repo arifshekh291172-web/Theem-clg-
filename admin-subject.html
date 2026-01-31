@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Manage Subjects</title>
+    <link rel="stylesheet" href="admin-subject.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        Manage Subjects
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>Add Subject</h3>
+
+            <input id="name" placeholder="Subject Name">
+
+            <select id="department">
+                <option value="">Select Department</option>
+                <option value="AN">AN</option>
+                <option value="AI">AI</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+                <option value="EE">EE</option>
+            </select>
+
+            <div class="years">
+                <label><input type="checkbox" value="FY"> FY</label>
+                <label><input type="checkbox" value="SY"> SY</label>
+                <label><input type="checkbox" value="TY"> TY</label>
+            </div>
+
+            <button onclick="addSubject()">Add Subject</button>
+            <p id="msg"></p>
+        </div>
+
+        <div class="card">
+            <h3>All Subjects</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dept</th>
+                        <th>Years</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="admin-subject.js"></script>
+</body>
+
+</html>

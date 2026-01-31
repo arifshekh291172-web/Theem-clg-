@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Teachers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-teacher-list.css">
+</head>
+
+<body>
+
+    <script>
+        if (!localStorage.getItem("adminToken")) {
+            location.href = "admin-login.html";
+        }
+    </script>
+
+    <div class="navbar">
+        <div class="title">Theem College Of Engineering – Teachers</div>
+        <div class="nav-actions">
+            <button onclick="goDashboard()">Dashboard</button>
+            <button class="logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="teacherBody"></tbody>
+        </table>
+
+    </div>
+
+    <script src="admin-teacher-list.js"></script>
+</body>
+
+</html>

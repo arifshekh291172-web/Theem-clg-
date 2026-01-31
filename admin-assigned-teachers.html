@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Assigned Teachers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .navbar {
+            background: #1e40af;
+            color: #fff;
+            padding: 16px 24px;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 24px;
+        }
+
+        table {
+            width: 100%;
+            background: #fff;
+            border-collapse: collapse;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left;
+        }
+
+        button {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            background: #2563eb;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Assigned Teachers</div>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Department</th>
+                    <th>Subject</th>
+                    <th>Years</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="listBody"></tbody>
+        </table>
+    </div>
+
+    <script src="admin-assigned-teachers.js"></script>
+</body>
+
+</html>

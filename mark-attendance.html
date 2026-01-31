@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mark Attendance | Teacher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mark-attendance.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div>Theem College Of Engineering</div>
+        <div>Mark Attendance</div>
+    </div>
+
+    <div class="container">
+
+        <div class="sidebar">
+            <a href="teacher-dashboard.html">Dashboard</a>
+            <a href="mark-attendance.html">Mark Attendance</a>
+            <a onclick="logout()">Logout</a>
+        </div>
+
+        <div class="content">
+
+            <div class="card">
+                <h3>Lecture Details</h3>
+
+                <div class="info">
+                    <div><b>Department:</b> <span id="deptText"></span></div>
+                    <div><b>Subject:</b> <span id="subjectText"></span></div>
+                    <div><b>Year:</b> <span id="yearText"></span></div>
+                </div>
+
+                <br>
+
+                <label><b>Date</b></label><br>
+                <input type="date" id="date">
+
+                <br><br>
+
+                <!-- 🔁 TOGGLE BUTTON -->
+                <button class="btn btn-secondary" onclick="toggleNames()">
+                    Show Names
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>Student Attendance</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No</th>
+                            <th class="name-col">Name</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentRows"></tbody>
+                </table>
+
+                <br>
+                <button class="btn btn-primary" onclick="submitAttendance()">
+                    Submit Attendance
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="mark-attendance.js"></script>
+</body>
+
+</html>

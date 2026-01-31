@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Students | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="student-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>Manage Students (Admin)</h2>
+</div>
+
+<div class="container">
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <select id="filterDept">
+            <option value="">Select Department</option>
+            <option value="AN">AN</option>
+            <option value="AI">AI</option>
+            <option value="CE">CE</option>
+            <option value="ME">ME</option>
+            <option value="EE">EE</option>
+        </select>
+
+        <select id="filterYear">
+            <option value="">Select Year</option>
+            <option value="FY">FY</option>
+            <option value="SY">SY</option>
+            <option value="TY">TY</option>
+        </select>
+
+        <input type="file" id="fileInput" accept=".csv,.xlsx">
+        <button onclick="uploadFile()">Upload CSV / Excel</button>
+        <button onclick="openAddStudent()">+ Add Student</button>
+    </div>
+
+    <!-- TABLE -->
+    <table>
+        <thead>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Parent Email</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</div>
+
+<!-- PARENT EMAIL MODAL -->
+<div class="modal" id="emailModal">
+    <div class="box">
+        <h3>Add Parent Email</h3>
+        <input id="parentEmailInput" placeholder="Parent Email">
+        <button onclick="saveParentEmail()">Save</button>
+        <button class="btn-danger" onclick="closeEmailModal()">Cancel</button>
+    </div>
+</div>
+
+<!-- ADD STUDENT MODAL -->
+<div class="modal" id="studentModal">
+    <div class="box">
+        <h3>Add Student</h3>
+
+        <input id="rollNo" placeholder="Roll No">
+        <input id="name" placeholder="Name">
+
+        <!-- IMPORTANT: SAME IDS AS FILTERS -->
+        <select id="modalDept">
+            <option value="">Select Department</option>
+            <option value="AN">AN</option>
+            <option value="AI">AI</option>
+            <option value="CE">CE</option>
+            <option value="ME">ME</option>
+            <option value="EE">EE</option>
+        </select>
+
+        <select id="modalYear">
+            <option value="">Select Year</option>
+            <option value="FY">FY</option>
+            <option value="SY">SY</option>
+            <option value="TY">TY</option>
+        </select>
+
+        <button onclick="saveStudent()">Save</button>
+        <button class="btn-danger" onclick="closeStudentModal()">Cancel</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="student-details.js"></script>
+
+</body>
+</html>
