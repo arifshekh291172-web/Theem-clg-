@@ -41,7 +41,7 @@ const subjectRoutes = require("./routes/subjectRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 
 /* ✅ STUDENTS (TEACHER SAFE ROUTE) */
-const teacherStudentRoutes = require("./routes/teacherStudentRoutes");
+const teacherstudentRoutes = require("./routes/teacherstudentRoutes");
 
 /* ATTENDANCE */
 const attendanceRoutes = require("./routes/attendanceRoutes");
@@ -67,7 +67,7 @@ app.use("/api/admin", subjectRoutes);
 
 /* STUDENTS */
 app.use("/api/students", studentRoutes); // admin only
-app.use("/api/teacher", teacherStudentRoutes); // ✅ teacher access
+app.use("/api/teacher", teacherstudentRoutes); // ✅ teacher access
 
 /* ATTENDANCE */
 app.use("/api/attendance", attendanceRoutes);
