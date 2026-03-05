@@ -7,11 +7,13 @@ const TeacherAssignment = require("../models/TeacherAssignment");
 
 const router = express.Router();
 
-/* =====================================================
-   TEACHER LOGIN (FINAL – ASSIGNMENT BASED)
-===================================================== */
+/* =========================================
+   TEACHER LOGIN
+========================================= */
 router.post("/login", async (req, res) => {
+
   try {
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -19,43 +21,54 @@ router.post("/login", async (req, res) => {
     }
 
     const teacher = await Teacher.findOne({ email, isActive: true });
+
     if (!teacher) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const ok = await bcrypt.compare(password, teacher.password);
+
     if (!ok) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    /* 🔐 JWT */
+    /* JWT TOKEN */
     const token = jwt.sign(
       { id: teacher._id, role: "teacher" },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || "secret123",
       { expiresIn: "1d" }
     );
 
-    /* 🔥 GET ADMIN ASSIGNMENT (MOST IMPORTANT PART) */
+    /* GET ASSIGNMENTS */
     const assignments = await TeacherAssignment
       .find({ teacher: teacher._id })
       .populate("subject", "name");
 
-    if (!assignments.length) {
+    /* If no assignment */
+    if (!assignments || assignments.length === 0) {
+
       return res.json({
         token,
         teacher: {
           id: teacher._id,
           name: teacher.name,
           email: teacher.email,
-          assignments: []   // no assignment yet
+          departments: [],
+          subjects: [],
+          years: []
         }
       });
+
     }
 
-    /* 🔄 Normalize data for frontend */
+    /* SAFE DATA FORMAT */
     const departments = [...new Set(assignments.map(a => a.department))];
-    const subjects = assignments.map(a => a.subject.name);
-    const years = [...new Set(assignments.flatMap(a => a.years))];
+
+    const subjects = assignments
+      .map(a => a.subject?.name)
+      .filter(Boolean);
+
+    const years = [...new Set(assignments.flatMap(a => a.years || []))];
 
     res.json({
       token,
@@ -70,9 +83,16 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Teacher login failed" });
+
+    console.error("Teacher Login Error:", err);
+
+    res.status(500).json({
+      message: "Teacher login failed",
+      error: err.message
+    });
+
   }
+
 });
 
 module.exports = router;
